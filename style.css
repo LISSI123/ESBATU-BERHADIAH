@@ -1,11 +1,12 @@
 body {
   font-family: 'Poppins', Arial, sans-serif;
-  background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+  background: radial-gradient(circle at 50% 30%, #ff003c 0%, #2c000a 100%);
   color: #fff;
   min-height: 100vh;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  box-shadow: 0 0 120px 40px #ff003c55 inset;
 }
 
 .main-header {
@@ -38,50 +39,168 @@ body {
 }
 
 .form-box.glass-effect {
-  background: rgba(255,255,255,0.08);
-  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
-  backdrop-filter: blur(10px);
-  border-radius: 24px;
-  border: 1.5px solid rgba(255,255,255,0.18);
-  padding: 32px 24px 24px 24px;
-  max-width: 350px;
-  margin: 32px auto 24px auto;
+  background: rgba(255,255,255,0.13);
+  box-shadow: 0 8px 32px 0 #ff003c55, 0 2px 12px #ffd70055;
+  backdrop-filter: blur(14px);
+  border-radius: 32px;
+  border: 2.5px solid #ffd70055;
+  padding: 38px 28px 28px 28px;
+  max-width: 400px;
+  margin: 36px auto 28px auto;
   position: relative;
   z-index: 2;
+  animation: fadeInForm 1.2s cubic-bezier(.4,2,.3,1);
+}
+@keyframes fadeInForm {
+  0% { opacity: 0; transform: translateY(-40px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.avatar-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.avatar-img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  box-shadow: 0 0 24px #ffd70099, 0 2px 12px #fffbe6;
+  background: #fffbe6;
+  margin-bottom: 6px;
+  border: 2.5px solid #ffd700cc;
+  transition: box-shadow 0.3s;
+}
+.user-preview {
+  color: #ffd700;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-shadow: 0 2px 8px #fffbe6, 0 0px 12px #ffd70099;
+  margin-bottom: 8px;
+}
+.input-group {
+  display: flex;
+  align-items: center;
+  margin: 12px 0;
+  background: rgba(255,255,255,0.18);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #ffd70022;
+  padding: 0 8px;
+}
+.input-icon {
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  filter: drop-shadow(0 2px 8px #ffd70099);
 }
 .input-mewah {
-  padding: 12px 18px;
-  margin: 10px 0;
-  width: 90%;
+  flex: 1;
+  padding: 14px 12px;
   border: none;
   border-radius: 12px;
-  background: rgba(255,255,255,0.18);
+  background: transparent;
   color: #fff;
   font-size: 1.1rem;
-  box-shadow: 0 2px 12px rgba(0,238,255,0.08);
+  box-shadow: none;
   outline: none;
   transition: box-shadow 0.3s;
 }
 .input-mewah:focus {
-  box-shadow: 0 0 0 2px #00eaff, 0 2px 12px rgba(0,238,255,0.18);
+  box-shadow: 0 0 0 2px #ffd700, 0 2px 12px #ffd70033;
+  background: rgba(255,255,255,0.22);
 }
 .btn-mewah {
-  padding: 12px 32px;
-  background: linear-gradient(90deg, #00eaff, #005bea);
+  padding: 14px 36px;
+  background: linear-gradient(90deg, #ffd700, #ff003c);
   border: none;
-  border-radius: 16px;
-  color: #fff;
+  border-radius: 18px;
+  color: #7a4c00;
   font-size: 1.2rem;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 1px;
   cursor: pointer;
   margin-top: 18px;
-  box-shadow: 0 4px 24px #00eaff44;
-  transition: background 0.3s, transform 0.2s;
+  box-shadow: 0 4px 24px #ffd70044;
+  transition: background 0.3s, color 0.2s, transform 0.2s;
 }
 .btn-mewah:hover {
-  background: linear-gradient(90deg, #43cea2, #185a9d);
+  background: linear-gradient(90deg, #fffbe6, #ffd700);
+  color: #b8860b;
   transform: scale(1.06);
+}
+.btn-syarat {
+  margin-top: 14px;
+  padding: 10px 24px;
+  background: linear-gradient(90deg, #ff003c, #ffd700);
+  color: #fffbe6;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 2px 12px #ff003c44;
+  cursor: pointer;
+  transition: background 0.3s, color 0.2s, transform 0.2s;
+}
+.btn-syarat:hover {
+  background: linear-gradient(90deg, #ffd700, #ff003c);
+  color: #ff003c;
+  transform: scale(1.05);
+}
+/* Modal Syarat & Ketentuan */
+.modal-syarat {
+  display: none;
+  position: fixed;
+  z-index: 99999;
+  left: 0; top: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.55);
+  align-items: center;
+  justify-content: center;
+  animation: fadeInModal 0.5s;
+}
+@keyframes fadeInModal {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.modal-syarat.active { display: flex; }
+.modal-content {
+  background: #fffbe6;
+  color: #ff003c;
+  border-radius: 18px;
+  padding: 32px 28px 24px 28px;
+  box-shadow: 0 8px 32px #ffd70055, 0 2px 12px #ff003c33;
+  max-width: 350px;
+  text-align: left;
+  position: relative;
+  animation: popModal 0.5s cubic-bezier(.4,2,.3,1);
+}
+@keyframes popModal {
+  0% { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.close-modal {
+  position: absolute;
+  right: 18px; top: 12px;
+  font-size: 2rem;
+  color: #ff003c;
+  cursor: pointer;
+  font-weight: 900;
+  transition: color 0.2s;
+}
+.close-modal:hover { color: #ffd700; }
+.modal-content h3 {
+  margin-top: 0;
+  color: #b8860b;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+.modal-content ul {
+  margin: 0 0 0 18px;
+  padding: 0;
+  color: #ff003c;
+  font-size: 1.05rem;
+}
+.modal-content li {
+  margin-bottom: 8px;
 }
 
 .game-box.glass-effect {
@@ -98,6 +217,8 @@ body {
 }
 
 .grid-box {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: repeat(3, 110px);
   grid-gap: 32px;
@@ -185,6 +306,72 @@ body {
   opacity: 0.7;
   z-index: 2;
   position: relative;
+}
+
+/* Partikel grid emas glow */
+.gold-particles {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.gold-dot {
+  position: absolute;
+  width: 14px; height: 14px;
+  background: radial-gradient(circle, #ffd700 60%, #fffbe6 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 18px 6px #ffd70099, 0 0 2px #fff;
+  opacity: 0.85;
+  animation: goldGlow 2.5s infinite alternate;
+}
+@keyframes goldGlow {
+  0% { box-shadow: 0 0 8px 2px #ffd70099, 0 0 2px #fff; opacity: 0.7; }
+  100% { box-shadow: 0 0 24px 10px #ffd700cc, 0 0 6px #fff; opacity: 1; }
+}
+
+/* Claim Telegram box */
+#claim-telegram {
+  position: fixed;
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%) scale(0.9);
+  z-index: 9999;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(.4,2,.3,1);
+}
+#claim-telegram.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.claim-box {
+  background: rgba(255,255,255,0.13);
+  border: 2px solid #ffd700cc;
+  border-radius: 18px;
+  box-shadow: 0 0 32px #ffd70055, 0 2px 12px #fffbe6;
+  padding: 28px 32px;
+  color: #ffd700;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 12px;
+}
+.btn-claim-tg {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 12px 32px;
+  background: linear-gradient(90deg, #ffd700, #ffb300);
+  color: #7a4c00;
+  font-weight: 800;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 24px #ffd70044;
+  transition: background 0.3s, color 0.2s, transform 0.2s;
+}
+.btn-claim-tg:hover {
+  background: linear-gradient(90deg, #fffbe6, #ffd700);
+  color: #b8860b;
+  transform: scale(1.08);
 }
 
 /* Background bubbles dekoratif */
