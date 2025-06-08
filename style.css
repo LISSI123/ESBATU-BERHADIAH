@@ -1,0 +1,78 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background: #0a0a0a;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+}
+
+.form-box {
+  margin-bottom: 30px;
+}
+
+input {
+  padding: 10px;
+  margin: 5px;
+  width: 200px;
+  border: none;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  background: #28a745;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.grid-box {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.ice {
+  width: 100px;
+  height: 100px;
+  background: url('https://i.ibb.co/VVMfkWg/ice-block.png') no-repeat center center;
+  background-size: cover;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.ice.clicked {
+  background: url('https://i.ibb.co/G9X5P0S/cracked-ice.png') no-repeat center center;
+  background-size: cover;
+}
+
+.ice.broken {
+  background: none;
+  background-color: transparent;
+  pointer-events: none;
+}
+
+.hadiah {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  font-weight: bold;
+  display: none;
+  color: #00ffcc;
+}
+
+.ice.broken .hadiah {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
