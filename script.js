@@ -92,34 +92,76 @@ mulaiBtn.addEventListener("click", async () => {
   showToast("Selamat datang! Silakan pilih es batu.", "success");
 });
 
-const esBatu = document.querySelectorAll(".ice");
+// Ganti gambar es batu dan es retak dengan gambar baru yang lebih jelas
+const ICE_IMG = 'https://cdn.pixabay.com/photo/2016/03/23/19/58/ice-1273382_1280.png';
+const ICE_CRACKED_IMG = 'https://cdn.pixabay.com/photo/2017/01/06/19/15/ice-1959326_1280.png';
 
+// Konfigurasi pukulan
+const MAX_HIT = 3;
+let sudahPilih = false;
+
+// Inisialisasi state pukulan untuk setiap es
+const esBatu = document.querySelectorAll('.ice');
+const hitCounter = Array.from({ length: esBatu.length }, () => 0);
+
+// Set gambar es baru
 esBatu.forEach((el) => {
-  el.addEventListener("click", async () => {
-    if (el.classList.contains("broken")) return;
-    el.classList.add("clicked");
-    audioClick.currentTime = 0;
-    audioClick.play();
+  el.style.background = `url('${ICE_IMG}') no-repeat center center`;
+  el.style.backgroundSize = 'cover';
+});
 
-    setTimeout(async () => {
-      el.classList.remove("clicked");
-      el.classList.add("broken");
+esBatu.forEach((el, idx) => {
+  el.addEventListener('click', async () => {
+    if (sudahPilih) return;
+    if (el.classList.contains('broken')) return;
+    hitCounter[idx]++;
+    el.classList.add('clicked');
+    setTimeout(() => el.classList.remove('clicked'), 200);
 
+    // Ganti gambar jika sudah retak (pukulan ke-2)
+    if (hitCounter[idx] === 2) {
+      el.style.background = `url('${ICE_CRACKED_IMG}') no-repeat center center`;
+      el.style.backgroundSize = 'cover';
+    }
+
+    // Jika sudah cukup pukulan, pecahkan es
+    if (hitCounter[idx] >= MAX_HIT) {
+      el.classList.add('broken');
+      el.style.background = 'none';
+      el.querySelector('.hadiah').textContent = '';
+      sudahPilih = true;
+      // Random hadiah
       const hadiah = hadiahList[Math.floor(Math.random() * hadiahList.length)];
-      el.querySelector(".hadiah").textContent = `+${hadiah.toLocaleString()}`;
-      el.querySelector(".hadiah").classList.add("pop-hadiah");
+      el.querySelector('.hadiah').textContent = `+${hadiah.toLocaleString()}`;
+      el.querySelector('.hadiah').classList.add('pop-hadiah');
       audioSuccess.currentTime = 0;
       audioSuccess.play();
-      showToast(`Selamat! Kamu dapat hadiah Rp${hadiah.toLocaleString()}`, "success");
+      showToast(`Selamat! Kamu dapat hadiah Rp${hadiah.toLocaleString()}\nClaim hadiah ke Telegram:`, 'success');
+      // Tampilkan tombol/teks claim Telegram
+      showClaimTelegram();
       await loadConfetti();
       window.confetti && window.confetti({
         particleCount: 80,
         spread: 70,
         origin: { y: 0.6 },
       });
-    }, 500);
+    }
   });
 });
+
+function showClaimTelegram() {
+  if (document.getElementById('claim-telegram')) return;
+  const claim = document.createElement('div');
+  claim.id = 'claim-telegram';
+  claim.innerHTML = `
+    <div class="claim-box">
+      <b>Claim hadiah kamu di Telegram:</b><br>
+      <a href="https://t.me/freebetjokerscm" target="_blank" class="btn-claim-tg">CLAIM SEKARANG</a>
+    </div>
+  `;
+  document.body.appendChild(claim);
+  setTimeout(() => claim.classList.add('show'), 100);
+}
 
 // Toast CSS inject (agar toast tampil mewah)
 (function injectToastStyle() {
