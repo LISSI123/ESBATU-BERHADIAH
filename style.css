@@ -1,49 +1,236 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Es Batu Berhadiah</title>
-  <link rel="stylesheet" href="style.css" />
-  <script type="module" src="script.js" defer></script>
-</head>
-<body>
-  <!-- Header dengan logo dan judul -->
-  <header class="main-header">
-    <img src="https://img.icons8.com/fluency/96/ice-cube.png" alt="Logo Es Batu" class="logo" />
-    <h1 class="main-title">Es Batu Berhadiah Ultra Spin</h1>
-    <p class="subtitle">Rasakan sensasi memilih es batu berhadiah dengan tampilan super mewah!</p>
-  </header>
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+  color: #fff;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
 
-  <!-- Form input dengan efek glassmorphism -->
-  <div class="form-box glass-effect">
-    <h2>Masukkan Data</h2>
-    <input type="text" id="userId" placeholder="User ID" class="input-mewah" />
-    <input type="text" id="kupon" placeholder="Kode Kupon" class="input-mewah" />
-    <button id="mulaiBtn" class="btn-mewah">Mulai Game</button>
-  </div>
+.main-header {
+  margin-top: 32px;
+  margin-bottom: 24px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.logo {
+  width: 80px;
+  filter: drop-shadow(0 4px 24px #00eaff88);
+  margin-bottom: 8px;
+}
+.main-title {
+  font-size: 2.6rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, #00eaff, #005bea, #43cea2);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+.subtitle {
+  font-size: 1.1rem;
+  color: #b2f7ef;
+  margin-top: 8px;
+  margin-bottom: 0;
+}
 
-  <!-- Box game dengan animasi -->
-  <div id="gameBox" class="hidden game-box glass-effect">
-    <h2>Pilih Es Batu</h2>
-    <div class="grid-box">
-      <div class="ice ice-anim" data-id="1"><span class="hadiah"></span></div>
-      <div class="ice ice-anim" data-id="2"><span class="hadiah"></span></div>
-      <div class="ice ice-anim" data-id="3"><span class="hadiah"></span></div>
-      <div class="ice ice-anim" data-id="4"><span class="hadiah"></span></div>
-      <div class="ice ice-anim" data-id="5"><span class="hadiah"></span></div>
-      <div class="ice ice-anim" data-id="6"><span class="hadiah"></span></div>
-    </div>
-  </div>
+.form-box.glass-effect {
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  border: 1.5px solid rgba(255,255,255,0.18);
+  padding: 32px 24px 24px 24px;
+  max-width: 350px;
+  margin: 32px auto 24px auto;
+  position: relative;
+  z-index: 2;
+}
+.input-mewah {
+  padding: 12px 18px;
+  margin: 10px 0;
+  width: 90%;
+  border: none;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.18);
+  color: #fff;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 12px rgba(0,238,255,0.08);
+  outline: none;
+  transition: box-shadow 0.3s;
+}
+.input-mewah:focus {
+  box-shadow: 0 0 0 2px #00eaff, 0 2px 12px rgba(0,238,255,0.18);
+}
+.btn-mewah {
+  padding: 12px 32px;
+  background: linear-gradient(90deg, #00eaff, #005bea);
+  border: none;
+  border-radius: 16px;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin-top: 18px;
+  box-shadow: 0 4px 24px #00eaff44;
+  transition: background 0.3s, transform 0.2s;
+}
+.btn-mewah:hover {
+  background: linear-gradient(90deg, #43cea2, #185a9d);
+  transform: scale(1.06);
+}
 
-  <!-- Footer mewah -->
-  <footer class="main-footer">
-    <p>© 2025 Es Batu Berhadiah Ultra Spin. All rights reserved.</p>
-  </footer>
+.game-box.glass-effect {
+  background: rgba(255,255,255,0.10);
+  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.27);
+  backdrop-filter: blur(8px);
+  border-radius: 24px;
+  border: 1.5px solid rgba(255,255,255,0.18);
+  padding: 32px 24px 24px 24px;
+  max-width: 500px;
+  margin: 32px auto 24px auto;
+  position: relative;
+  z-index: 2;
+}
 
-  <!-- Background dekoratif -->
-  <ul class="background-bubbles">
-    <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
-  </ul>
-</body>
-</html>
+.grid-box {
+  display: grid;
+  grid-template-columns: repeat(3, 110px);
+  grid-gap: 32px;
+  justify-content: center;
+  margin-top: 32px;
+}
+.ice {
+  width: 110px;
+  height: 110px;
+  background: url('https://i.ibb.co/VVMfkWg/ice-block.png') no-repeat center center;
+  background-size: cover;
+  position: relative;
+  cursor: pointer;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px #00eaff33, 0 1.5px 0 #fff2 inset;
+  transition: transform 0.25s cubic-bezier(.4,2,.3,1), box-shadow 0.3s;
+  overflow: hidden;
+  border: 2.5px solid #00eaff44;
+  animation: floatIce 2.5s ease-in-out infinite alternate;
+}
+.ice-anim:nth-child(2) { animation-delay: 0.3s; }
+.ice-anim:nth-child(3) { animation-delay: 0.6s; }
+.ice-anim:nth-child(4) { animation-delay: 0.9s; }
+.ice-anim:nth-child(5) { animation-delay: 1.2s; }
+.ice-anim:nth-child(6) { animation-delay: 1.5s; }
+@keyframes floatIce {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-16px) scale(1.04); }
+}
+.ice:hover {
+  transform: scale(1.08) rotate(-2deg);
+  box-shadow: 0 8px 40px #00eaff77, 0 1.5px 0 #fff2 inset;
+  z-index: 3;
+}
+.ice.clicked {
+  background: url('https://i.ibb.co/G9X5P0S/cracked-ice.png') no-repeat center center;
+  background-size: cover;
+  animation: shakeIce 0.4s cubic-bezier(.4,2,.3,1);
+}
+@keyframes shakeIce {
+  0% { transform: scale(1) rotate(0deg); }
+  30% { transform: scale(1.1) rotate(-8deg); }
+  60% { transform: scale(0.95) rotate(6deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+.ice.broken {
+  background: none;
+  background-color: transparent;
+  pointer-events: none;
+  box-shadow: none;
+  border: 2.5px dashed #00eaff99;
+  animation: fadeOutIce 0.7s cubic-bezier(.4,2,.3,1);
+}
+@keyframes fadeOutIce {
+  0% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+.hadiah {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: none;
+  color: #00eaff;
+  text-shadow: 0 2px 12px #fff, 0 0px 32px #00eaff99;
+  letter-spacing: 1px;
+  pointer-events: none;
+}
+.ice.broken .hadiah {
+  display: block;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.main-footer {
+  text-align: center;
+  color: #b2f7ef;
+  font-size: 1rem;
+  margin: 48px 0 16px 0;
+  letter-spacing: 1px;
+  opacity: 0.7;
+  z-index: 2;
+  position: relative;
+}
+
+/* Background bubbles dekoratif */
+.background-bubbles {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+  margin: 0; padding: 0;
+  pointer-events: none;
+  list-style: none;
+}
+.background-bubbles li {
+  position: absolute;
+  display: block;
+  list-style: none;
+  width: 60px; height: 60px;
+  background: linear-gradient(135deg, #00eaff88 0%, #43cea288 100%);
+  opacity: 0.25;
+  border-radius: 50%;
+  animation: bubbleFloat 18s infinite linear;
+  bottom: -120px;
+}
+.background-bubbles li:nth-child(1) { left: 8vw; animation-delay: 0s; width: 80px; height: 80px; }
+.background-bubbles li:nth-child(2) { left: 18vw; animation-delay: 2s; }
+.background-bubbles li:nth-child(3) { left: 28vw; animation-delay: 4s; width: 100px; height: 100px; }
+.background-bubbles li:nth-child(4) { left: 38vw; animation-delay: 1s; }
+.background-bubbles li:nth-child(5) { left: 48vw; animation-delay: 3s; width: 70px; height: 70px; }
+.background-bubbles li:nth-child(6) { left: 58vw; animation-delay: 5s; }
+.background-bubbles li:nth-child(7) { left: 68vw; animation-delay: 7s; width: 90px; height: 90px; }
+.background-bubbles li:nth-child(8) { left: 78vw; animation-delay: 6s; }
+.background-bubbles li:nth-child(9) { left: 88vw; animation-delay: 8s; width: 60px; height: 60px; }
+.background-bubbles li:nth-child(10) { left: 95vw; animation-delay: 10s; }
+@keyframes bubbleFloat {
+  0% { transform: translateY(0) scale(1); opacity: 0.25; }
+  50% { opacity: 0.45; }
+  100% { transform: translateY(-110vh) scale(1.2); opacity: 0.1; }
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .main-title { font-size: 1.5rem; }
+  .form-box.glass-effect, .game-box.glass-effect { max-width: 98vw; padding: 18px 4vw; }
+  .grid-box { grid-template-columns: repeat(2, 110px); grid-gap: 18px; }
+}
+@media (max-width: 500px) {
+  .ice, .ice-anim { width: 80px; height: 80px; }
+  .grid-box { grid-template-columns: repeat(2, 80px); }
+}
