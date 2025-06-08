@@ -1,78 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Es Batu Berhadiah</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="script.js" defer></script>
+</head>
+<body>
+  <!-- Header dengan logo dan judul -->
+  <header class="main-header">
+    <img src="https://img.icons8.com/fluency/96/ice-cube.png" alt="Logo Es Batu" class="logo" />
+    <h1 class="main-title">Es Batu Berhadiah Ultra Spin</h1>
+    <p class="subtitle">Rasakan sensasi memilih es batu berhadiah dengan tampilan super mewah!</p>
+  </header>
 
-body {
-  font-family: Arial, sans-serif;
-  background: #0a0a0a;
-  color: #fff;
-  text-align: center;
-  margin: 0;
-  padding: 20px;
-}
+  <!-- Form input dengan efek glassmorphism -->
+  <div class="form-box glass-effect">
+    <h2>Masukkan Data</h2>
+    <input type="text" id="userId" placeholder="User ID" class="input-mewah" />
+    <input type="text" id="kupon" placeholder="Kode Kupon" class="input-mewah" />
+    <button id="mulaiBtn" class="btn-mewah">Mulai Game</button>
+  </div>
 
-.form-box {
-  margin-bottom: 30px;
-}
+  <!-- Box game dengan animasi -->
+  <div id="gameBox" class="hidden game-box glass-effect">
+    <h2>Pilih Es Batu</h2>
+    <div class="grid-box">
+      <div class="ice ice-anim" data-id="1"><span class="hadiah"></span></div>
+      <div class="ice ice-anim" data-id="2"><span class="hadiah"></span></div>
+      <div class="ice ice-anim" data-id="3"><span class="hadiah"></span></div>
+      <div class="ice ice-anim" data-id="4"><span class="hadiah"></span></div>
+      <div class="ice ice-anim" data-id="5"><span class="hadiah"></span></div>
+      <div class="ice ice-anim" data-id="6"><span class="hadiah"></span></div>
+    </div>
+  </div>
 
-input {
-  padding: 10px;
-  margin: 5px;
-  width: 200px;
-  border: none;
-  border-radius: 5px;
-}
+  <!-- Footer mewah -->
+  <footer class="main-footer">
+    <p>© 2025 Es Batu Berhadiah Ultra Spin. All rights reserved.</p>
+  </footer>
 
-button {
-  padding: 10px 20px;
-  background: #28a745;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-}
-
-.grid-box {
-  display: grid;
-  grid-template-columns: repeat(3, 100px);
-  grid-gap: 20px;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.ice {
-  width: 100px;
-  height: 100px;
-  background: url('https://i.ibb.co/VVMfkWg/ice-block.png') no-repeat center center;
-  background-size: cover;
-  position: relative;
-  cursor: pointer;
-  transition: transform 0.3s;
-}
-
-.ice.clicked {
-  background: url('https://i.ibb.co/G9X5P0S/cracked-ice.png') no-repeat center center;
-  background-size: cover;
-}
-
-.ice.broken {
-  background: none;
-  background-color: transparent;
-  pointer-events: none;
-}
-
-.hadiah {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 18px;
-  font-weight: bold;
-  display: none;
-  color: #00ffcc;
-}
-
-.ice.broken .hadiah {
-  display: block;
-}
-
-.hidden {
-  display: none;
-}
+  <!-- Background dekoratif -->
+  <ul class="background-bubbles">
+    <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+  </ul>
+</body>
+</html>
