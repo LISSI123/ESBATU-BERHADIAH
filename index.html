@@ -15,12 +15,37 @@
     <p class="subtitle">Rasakan sensasi memilih es batu berhadiah dengan tampilan super mewah!</p>
   </header>
 
-  <!-- Form input dengan efek glassmorphism -->
+  <!-- Form input dengan avatar, icon, dan efek mewah -->
   <div class="form-box glass-effect">
+    <div class="avatar-box">
+      <img id="avatarImg" src="https://api.dicebear.com/7.x/bottts/svg?seed=guest" alt="Avatar" class="avatar-img" />
+      <div class="user-preview" id="userPreview">Guest</div>
+    </div>
     <h2>Masukkan Data</h2>
-    <input type="text" id="userId" placeholder="User ID" class="input-mewah" />
-    <input type="text" id="kupon" placeholder="Kode Kupon" class="input-mewah" />
+    <div class="input-group">
+      <span class="input-icon"><img src="https://img.icons8.com/ios-filled/24/user.png"/></span>
+      <input type="text" id="userId" placeholder="User ID" class="input-mewah" autocomplete="off" />
+    </div>
+    <div class="input-group">
+      <span class="input-icon"><img src="https://img.icons8.com/ios-filled/24/ticket.png"/></span>
+      <input type="text" id="kupon" placeholder="Kode Kupon" class="input-mewah" autocomplete="off" />
+    </div>
     <button id="mulaiBtn" class="btn-mewah">Mulai Game</button>
+    <button id="syaratBtn" class="btn-syarat">Lihat Syarat & Ketentuan</button>
+  </div>
+
+  <!-- Modal Syarat & Ketentuan -->
+  <div id="modalSyarat" class="modal-syarat">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h3>Syarat & Ketentuan</h3>
+      <ul>
+        <li>1. Setiap user hanya bisa menggunakan 1 kupon.</li>
+        <li>2. Hadiah hanya bisa di-claim melalui Telegram resmi.</li>
+        <li>3. Dilarang menggunakan bot/cheat, pelanggaran akan diblokir.</li>
+        <li>4. Keputusan admin bersifat mutlak.</li>
+      </ul>
+    </div>
   </div>
 
   <!-- Box game dengan animasi -->
@@ -34,6 +59,9 @@
       <div class="ice ice-anim" data-id="5"><span class="hadiah"></span></div>
       <div class="ice ice-anim" data-id="6"><span class="hadiah"></span></div>
     </div>
+
+    <!-- Partikel grid emas glow -->
+    <div class="gold-particles"></div>
   </div>
 
   <!-- Footer mewah -->
