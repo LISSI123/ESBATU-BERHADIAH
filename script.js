@@ -96,49 +96,39 @@ mulaiBtn.addEventListener("click", async () => {
 const ICE_IMG = 'https://cdn.pixabay.com/photo/2016/03/23/19/58/ice-1273382_1280.png';
 const ICE_CRACKED_IMG = 'https://cdn.pixabay.com/photo/2017/01/06/19/15/ice-1959326_1280.png';
 
-// Konfigurasi pukulan
-const MAX_HIT = 3;
+// --- HANYA BOLEH PILIH SATU ES BATU ---
 let sudahPilih = false;
-
-// Inisialisasi state pukulan untuk setiap es
+const MAX_HIT = 3;
 const esBatu = document.querySelectorAll('.ice');
 const hitCounter = Array.from({ length: esBatu.length }, () => 0);
 
-// Set gambar es baru
-esBatu.forEach((el) => {
-  el.style.background = `url('${ICE_IMG}') no-repeat center center`;
-  el.style.backgroundSize = 'cover';
-});
-
 esBatu.forEach((el, idx) => {
   el.addEventListener('click', async () => {
-    if (sudahPilih) return;
+    if (sudahPilih && !el.classList.contains('broken')) return; // hanya satu yang bisa dipukul
     if (el.classList.contains('broken')) return;
     hitCounter[idx]++;
     el.classList.add('clicked');
     setTimeout(() => el.classList.remove('clicked'), 200);
-
-    // Ganti gambar jika sudah retak (pukulan ke-2)
     if (hitCounter[idx] === 2) {
       el.style.background = `url('${ICE_CRACKED_IMG}') no-repeat center center`;
       el.style.backgroundSize = 'cover';
     }
-
-    // Jika sudah cukup pukulan, pecahkan es
     if (hitCounter[idx] >= MAX_HIT) {
       el.classList.add('broken');
       el.style.background = 'none';
       el.querySelector('.hadiah').textContent = '';
       sudahPilih = true;
+      // Disable semua es lain
+      esBatu.forEach((e, i) => { if(i!==idx) e.classList.add('disabled-ice'); });
       // Random hadiah
       const hadiah = hadiahList[Math.floor(Math.random() * hadiahList.length)];
       el.querySelector('.hadiah').textContent = `+${hadiah.toLocaleString()}`;
       el.querySelector('.hadiah').classList.add('pop-hadiah');
       audioSuccess.currentTime = 0;
       audioSuccess.play();
-      showToast(`Selamat! Kamu dapat hadiah Rp${hadiah.toLocaleString()}\nClaim hadiah ke Telegram:`, 'success');
-      // Tampilkan tombol/teks claim Telegram
+      showToast(`Selamat! Kamu dapat hadiah Rp${hadiah.toLocaleString()}`,'success');
       showClaimTelegram();
+      showToast('Segera claim hadiah kamu ke Telegram: @freebetjokerscm', 'info');
       await loadConfetti();
       window.confetti && window.confetti({
         particleCount: 80,
