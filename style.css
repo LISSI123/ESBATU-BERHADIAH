@@ -38,6 +38,46 @@ body {
   margin-bottom: 0;
 }
 
+.login-grid-bg {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+.login-grid {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 420px;
+  height: 420px;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  pointer-events: none;
+  background: none;
+}
+.login-grid:before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; width: 100%; height: 100%;
+  background: repeating-linear-gradient(90deg, #ffd70044 0 2px, transparent 2px 70px),
+              repeating-linear-gradient(0deg, #ffd70044 0 2px, transparent 2px 70px);
+  border-radius: 32px;
+  box-shadow: 0 0 48px 8px #ffd70055, 0 2px 12px #fffbe6;
+  filter: blur(0.5px) drop-shadow(0 0 16px #ffd700cc);
+  opacity: 0.85;
+}
+.login-grid:after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; width: 100%; height: 100%;
+  border-radius: 32px;
+  box-shadow: 0 0 64px 12px #ffd70055 inset;
+  opacity: 0.7;
+}
+
 .form-box.glass-effect {
   background: rgba(255,255,255,0.13);
   box-shadow: 0 8px 32px 0 #ff003c55, 0 2px 12px #ffd70055;
@@ -417,7 +457,17 @@ body {
   .form-box.glass-effect, .game-box.glass-effect { max-width: 98vw; padding: 18px 4vw; }
   .grid-box { grid-template-columns: repeat(2, 110px); grid-gap: 18px; }
 }
+@media (max-width: 600px) {
+  .login-grid { width: 98vw; height: 340px; }
+}
 @media (max-width: 500px) {
   .ice, .ice-anim { width: 80px; height: 80px; }
   .grid-box { grid-template-columns: repeat(2, 80px); }
+}
+.ice.disabled-ice {
+  filter: grayscale(1) brightness(0.7) blur(1px) opacity(0.6);
+  pointer-events: none;
+  box-shadow: none;
+  border: 2.5px dashed #ffd70044;
+  transition: filter 0.3s, opacity 0.3s;
 }
